@@ -1,0 +1,149 @@
+you are tasked with building a command line sales managment system in python, The program should allow users to:
+Add a new product
+List all products
+Add a new customer
+List all customers
+Create a new sales order
+List all sales orders
+Quit THE program
+
+
+# Initialize empty lists to store products, customers, and sales orders data
+products = []
+customers = []
+sales_orders = []
+
+# Main menu function
+def main_menu():
+    while True:
+        print("\nSales Management System")
+        print("1. Add a new product")
+        print("2. List all products")
+        print("3. Add a new customer")
+        print("4. List all customers")
+        print("5. Create a new sales order")
+        print("6. List all sales orders")
+        print("7. Quit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_product()
+        elif choice == "2":
+            list_products()
+        elif choice == "3":
+            add_customer()
+        elif choice == "4":
+            list_customers()
+        elif choice == "5":
+            create_sales_order()
+        elif choice == "6":
+            list_sales_orders()
+        elif choice == "7":
+            print("Exiting the program. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Function to add a new product
+def add_product():
+    product_name = input("Enter product name: ")
+    products.append(product_name)
+    print(f"{product_name} added to the list of products.")
+
+# Function to list all products
+def list_products():
+    if not products:
+        print("No products available.")
+    else:
+        print("\nList of Products:")
+        for idx, product in enumerate(products, start=1):
+            print(f"{idx}. {product}")
+
+# Function to add a new customer
+def add_customer():
+    customer_name = input("Enter customer name: ")
+    customers.append(customer_name)
+    print(f"{customer_name} added to the list of customers.")
+
+# Function to list all customers
+def list_customers():
+    if not customers:
+        print("No customers available.")
+    else:
+        print("\nList of Customers:")
+        for idx, customer in enumerate(customers, start=1):
+            print(f"{idx}. {customer}")
+
+# Function to create a new sales order
+def create_sales_order():
+    if not customers:
+        print("No customers available. Please add a customer first.")
+        return
+    if not products:
+        print("No products available. Please add a product first.")
+        return
+
+    print("Create a New Sales Order:")
+    customer_index = select_customer()
+    product_index = select_product()
+    sale_amount = float(input("Enter the sale amount: $"))
+    sale_date = input("Enter the sale date (YYYY-MM-DD): ")
+
+    sales_order = {
+        'customer_name': customers[customer_index],
+        'product': products[product_index],
+        'amount': sale_amount,
+        'date': sale_date
+    }
+    sales_orders.append(sales_order)
+    print("Sales order created successfully.")
+
+# Function to list all sales orders
+def list_sales_orders():
+    if not sales_orders:
+        print("No sales orders available.")
+    else:
+        print("\nList of Sales Orders:")
+        for idx, order in enumerate(sales_orders, start=1):
+            print(f"Order {idx}:")
+            print(f"Customer Name: {order['customer_name']}")
+            print(f"Product Sold: {order['product']}")
+            print(f"Sale Amount: ${order['amount']:.2f}")
+            print(f"Date: {order['date']}")
+            print("-------------------------")
+
+# Function to select a customer
+def select_customer():
+    print("\nSelect a Customer:")
+    for idx, customer in enumerate(customers, start=1):
+        print(f"{idx}. {customer}")
+
+    while True:
+        try:
+            customer_index = int(input("Enter the number of the customer: ")) - 1
+            if 0 <= customer_index < len(customers):
+                return customer_index
+            else:
+                print("Invalid customer number. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+# Function to select a product
+def select_product():
+    print("\nSelect a Product:")
+    for idx, product in enumerate(products, start=1):
+        print(f"{idx}. {product}")
+
+    while True:
+        try:
+            product_index = int(input("Enter the number of the product: ")) - 1
+            if 0 <= product_index < len(products):
+                return product_index
+            else:
+                print("Invalid product number. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+if __name__ == "__main__":
+    main_menu()

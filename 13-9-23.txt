@@ -1,0 +1,11 @@
+13-9-23
+
+Data--> [On-premises data, Cloud data, Devices data, SaaS data]
+
+Power BI Solutions: POwer BI desktop, Power BI service, power BI mobile.
+
+ 
+
+
+
+

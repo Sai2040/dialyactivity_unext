@@ -1,0 +1,9 @@
+7-9-23
+
+web api:
+
+azure map--> primRay key
+
+web operations, api calls, mainly GET call.
+
+Reading data from different system to azure.
